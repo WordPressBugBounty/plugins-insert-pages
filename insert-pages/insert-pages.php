@@ -8,7 +8,7 @@
  * Domain Path: /languages
  * License: GPL2
  * Requires at least: 3.3.0
- * Version: 3.9.0
+ * Version: 3.9.1
  *
  * @package insert-pages
  */
@@ -564,6 +564,9 @@ if ( ! class_exists( 'InsertPagesPlugin' ) ) {
 					if ( is_null( $post ) ) {
 						$old_post_id = null;
 						$post = $inserted_page; // phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited
+					} elseif ( is_int( $post ) ) {
+						$old_post_id = $post;
+						$post = $inserted_page->ID;
 					} else {
 						$old_post_id = $post->ID;
 						$post->ID = $inserted_page->ID;
@@ -746,7 +749,7 @@ if ( ! class_exists( 'InsertPagesPlugin' ) ) {
 						// Title.
 						$title_tag = $attributes['inline'] ? 'span' : 'h1';
 						echo wp_kses_post( "<$title_tag class='insert-page-title'>" );
-						echo wp_kses_post( get_the_title( $inserted_page->ID ) );
+						echo esc_html( get_the_title( $inserted_page->ID ) );
 						echo wp_kses_post( "</$title_tag>" );
 						// Content.
 						$content = get_post_field( 'post_content', $inserted_page->ID );
@@ -880,6 +883,9 @@ if ( ! class_exists( 'InsertPagesPlugin' ) ) {
 						if ( is_null( $post ) ) {
 							$old_post_id = null;
 							$post = $inserted_page; // phpcs:ignore WordPress.WP.GlobalVariablesOverride
+						} elseif ( is_int( $post ) ) {
+							$old_post_id = $post;
+							$post = $inserted_page->ID;
 						} else {
 							$old_post_id = $post->ID;
 							$post->ID = $inserted_page->ID;
@@ -973,6 +979,8 @@ if ( ! class_exists( 'InsertPagesPlugin' ) ) {
 
 						if ( is_null( $old_post_id ) ) {
 							$post = null; // phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited
+						} elseif ( is_int( $post ) ) {
+							$post = $old_post_id;
 						} else {
 							$post->ID = $old_post_id;
 						}
