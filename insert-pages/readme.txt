@@ -1,8 +1,8 @@
 === Insert Pages ===
 Contributors: figureone, the_magician
 Tags: insert, pages, shortcode, embed
-Tested up to: 6.8
-Stable tag: 3.9.2
+Tested up to: 6.9
+Stable tag: 3.11.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -109,6 +109,26 @@ Just one! The plugin prevents you from embedding a page in itself, but you can t
 3. Insert Pages shortcode example.
 
 == Changelog ==
+
+= 3.11.2 =
+* Fix for Divi redirecting to inserted page when an Insert Pages shortcode exists in the classic editor. Props airflo for the [report](https://github.com/uhm-coe/insert-pages/issues/65)!
+
+= 3.11.1 =
+* Fix inserting pages with parentheses in the page slug/title. Props @lineuponline for the [report](https://wordpress.org/support/topic/cant-get-away-with-title-rather-than-slug-or-page-id-anymore/)!
+
+= 3.11.0 =
+* NOTICE: If you intentionally insert unpublished content (e.g., future, draft, pending, or private), go to Insert Pages Settings after installing this update and enable that functionality in "Allow anonymous users to see inserted pages with these statuses." This version changes the plugin behavior to only allow inserting the "publish" post status by default (more secure).
+* Add plugin option to choose post statuses other than "published" that can be publicly viewable.
+* Remove the "Reveal Private Pages?" block attribute (and the "public" shortcode attribute) that allowed inserted private pages to be publicly viewable, since it can be controlled by lower-privilege users. Use the new plugin option above to set this behavior.
+* Prevent inserting pages with trash or revision post statuses (security).
+
+= 3.10.0 =
+* Fix URLInput in Insert Pages block (render URLInput in a Popover component to prevent overflow issues).
+* Migrate Insert Pages block to API version 3 (WordPress 6.3 or greater). Allows [block editor to be iframed](https://developer.wordpress.org/block-editor/reference-guides/block-api/block-api-versions/).
+* Tested up to WordPress 6.9 (6.9-RC2).
+
+= 3.9.3 =
+* Support Otter Blocks in inserted pages. Props @joeb2880 for the [request](https://wordpress.org/support/topic/otter-accordions-not-displaying-properly-when-inserted/)!
 
 = 3.9.2 =
 * Fix error when tinymce is used outside of admin context (e.g., in other plugins like Gravity Forms).
@@ -510,6 +530,9 @@ add_action( 'init', 'theme_init' );`
 * Development release.
 
 == Upgrade Notice ==
+
+= 3.11.0 =
+If you intentionally insert unpublished content (e.g., future, draft, pending, or private), go to Insert Pages Settings after installing this update and enable that functionality in "Allow anonymous users to see inserted pages with these statuses." This version changes the plugin behavior to only allow inserting the "publish" post status by default (more secure).
 
 = 3.7.0 =
 If you insert private pages/posts, please review the post authors of the pages containing the inserted page and confirm they have the capability to read the private content. This upgrade enforces private page visibility based on the role of the author of the page that inserts any private content.
